@@ -1,4 +1,12 @@
-devise-stormpath
-================
+Devise Stormpath authentication
+===========================
 
-Stormpath authentication for Devise
+Usage
+-----
+In the Gemfile for your application:
+
+    gem "devise-stormpath"
+
+In devise model:
+
+    devise :stormpath_authenticatable
