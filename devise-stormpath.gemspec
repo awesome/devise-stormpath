@@ -7,7 +7,6 @@ Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
   s.summary  = 'Devise extension to allow authentication via Stormpath'
   s.email = 'liquidautumn@gmail.com'
-  s.homepage = 'https://github.com/liquidautumn/devise-stormpath'
   s.description = s.summary
   s.author = 'Denis Grankin'
 
