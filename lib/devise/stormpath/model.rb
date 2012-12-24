@@ -1,5 +1,4 @@
-require 'devise/stormpath/strategy'
-require 'stormpath-rails'
+require "active_support/concern"
 
 module Devise
   module Models
@@ -12,10 +11,10 @@ module Devise
       end
 
       module ClassMethods
+        #TODO support login with email
         def authenticate_with_stormpath(attributes={})
-          login = (self.case_insensitive_keys || []).include?(:username) ? attributes[:username].downcase : attributes[:username]
           begin
-            account = ::Stormpath::Rails::Client.authenticate_account(login, attributes[:password])
+            account = ::Stormpath::Rails::Client.authenticate_account(attributes[:username], attributes[:password])
             return self.where(stormpath_url: account.get_href).first
           rescue ResourceError => error
             return nil

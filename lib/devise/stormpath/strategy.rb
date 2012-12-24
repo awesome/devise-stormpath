@@ -11,5 +11,3 @@ module Devise
     end
   end
 end
-
-Warden::Strategies.add(:stormpath_authenticatable, Devise::Strategies::StormpathAuthenticatable)

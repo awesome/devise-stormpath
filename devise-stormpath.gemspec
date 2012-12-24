@@ -17,6 +17,10 @@ Gem::Specification.new do |s|
 
   s.add_dependency('devise')
   s.add_dependency('stormpath-rails')
+  s.add_dependency('activesupport')
 
-  s.add_development_dependency('rake')
+  s.add_development_dependency('rake', '~> 10.0.2')
+  s.add_development_dependency('rspec', '~> 2.12.0')
+  s.add_development_dependency('guard-rspec', '~> 2.2.1')
+  s.add_development_dependency('rb-inotify', '~> 0.8.8')
 end
