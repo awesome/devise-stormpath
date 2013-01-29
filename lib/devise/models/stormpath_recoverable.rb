@@ -25,27 +25,33 @@ module Devise
             account = ::Stormpath::Rails::Client.send_password_reset_email(identifier)
             return self.where(stormpath_url: account.get_href).first
           rescue RuntimeError => error
-            u = self.new(attributes)
-            u.errors[:base] << error.message
-            return u
+            build_invalid_account(attributes, error)
           end
         end
 
         def reset_password_by_token(attributes={})
           begin
-            #TODO work on better error handling and move strings to locales
-            raise RuntimeError.new "Password reset token required" unless attributes[:reset_password_token]
-            raise RuntimeError.new "Password should match confirmation" unless attributes[:password] == attributes[:password_confirmation]
-            raise RuntimeError.new "Password required" unless attributes[:password] && !attributes[:password].empty?
+            validate_attributes(attributes)
             account = ::Stormpath::Rails::Client.verify_password_reset_token(attributes[:reset_password_token])
             account.set_password attributes[:password]
             account.save
-            return self.where(stormpath_url: account.get_href).first
+            self.where(stormpath_url: account.get_href).first
           rescue RuntimeError => error
-            u = self.new(attributes)
-            u.errors[:base] << error.message
-            return u
+            build_invalid_account(attributes, error)
           end
+        end
+
+        def build_invalid_account(attributes, error)
+          u = self.new(attributes)
+          u.errors[:base] << error.message
+          u
+        end
+
+        #TODO work on better error handling and move strings to locales
+        def validate_attributes(attributes)
+          raise RuntimeError.new "Password reset token required" unless attributes[:reset_password_token]
+          raise RuntimeError.new "Password should match confirmation" unless attributes[:password] == attributes[:password_confirmation]
+          raise RuntimeError.new "Password required" unless attributes[:password] && !attributes[:password].empty?
         end
       end
     end
