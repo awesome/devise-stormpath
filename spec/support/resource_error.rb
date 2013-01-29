@@ -1,0 +1,2 @@
+class ResourceError < RuntimeError
+end

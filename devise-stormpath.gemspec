@@ -7,6 +7,7 @@ Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
   s.summary  = 'Devise extension to allow authentication via Stormpath'
   s.email = 'liquidautumn@gmail.com'
+  s.homepage      = "http://www.stormpath.com"
   s.description = s.summary
   s.author = 'Denis Grankin'
 
@@ -16,7 +17,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency('devise')
-  s.add_dependency('stormpath-rails')
+  s.add_dependency('stormpath-rails', '~> 0.4.0')
   s.add_dependency('activesupport')
 
   s.add_development_dependency('rake', '~> 10.0.2')

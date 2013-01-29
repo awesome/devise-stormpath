@@ -1,9 +1,11 @@
-require 'devise'
 require 'stormpath-rails'
 
-require 'devise/stormpath/strategy'
+require 'devise'
+require 'devise/stormpath/routes'
+require 'devise/stormpath/rails'
+require 'devise/strategies/stormpath_authenticatable'
 
 Warden::Strategies.add(:stormpath_authenticatable, Devise::Strategies::StormpathAuthenticatable)
 
-Devise.add_module(:stormpath_authenticatable,
-                  :route => :session, :strategy => true, :controller => :sessions, :model  => 'devise/stormpath/model')
+Devise.add_module(:stormpath_authenticatable, :route => :session, :strategy => true, :controller => :sessions, :model  => 'devise/models/stormpath_authenticatable')
+Devise.add_module(:stormpath_recoverable, :route => :password, :controller => :stormpath_passwords, :model  => 'devise/models/stormpath_recoverable')

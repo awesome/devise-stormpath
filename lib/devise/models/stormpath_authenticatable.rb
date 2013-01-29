@@ -5,6 +5,10 @@ module Devise
     module StormpathAuthenticatable
       extend ActiveSupport::Concern
 
+      def self.required_fields(klass)
+        [:current_password, :password, :password_confirmation]
+      end
+
       included do
         attr_accessor :password_confirmation, :password
         attr_reader :current_password

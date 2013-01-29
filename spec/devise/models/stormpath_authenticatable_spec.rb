@@ -1,18 +1,15 @@
 require "spec_helper"
-require "devise/stormpath/model"
+require "devise/models/stormpath_authenticatable"
 
-class User
-  include Devise::Models::StormpathAuthenticatable
-end
-
-class ResourceError < Exception
-end
 
 describe Devise::Models::StormpathAuthenticatable do
+  class User
+    include Devise::Models::StormpathAuthenticatable
+  end
 
   let(:user) { mock("user") }
 
-  describe "#authenticate_with_stormpath" do
+  describe "::authenticate_with_stormpath" do
     it "should return user if authenticated on stormpath and local user exists with returned href" do
       Stormpath::Rails::Client.should_receive(:authenticate_account).with("username", "password").and_return(mock("account", get_href: "user href"))
       User.should_receive(:where).with(stormpath_url: "user href").and_return([user])
