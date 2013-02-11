@@ -14,6 +14,10 @@ module Devise
         attr_reader :current_password
       end
 
+      def active_for_authentication?
+        super && !%w{DISABLED BLOCKED}.include?(status)
+      end
+
       module ClassMethods
         #TODO support login with email
         def authenticate_with_stormpath(attributes={})
