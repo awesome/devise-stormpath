@@ -15,7 +15,7 @@ module Devise
       end
 
       def active_for_authentication?
-        super && !%w{DISABLED BLOCKED}.include?(status)
+        super && !%w{DISABLED LOCKED}.include?(status)
       end
 
       module ClassMethods
