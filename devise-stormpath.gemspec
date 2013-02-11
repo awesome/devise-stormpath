@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency('devise')
-  s.add_dependency('stormpath-rails', '~> 0.4.0')
+  s.add_dependency('stormpath-rails', '>= 0.4.3')
   s.add_dependency('activesupport')
 
   s.add_development_dependency('rake', '~> 10.0.2')
