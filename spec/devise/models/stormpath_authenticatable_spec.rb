@@ -4,6 +4,12 @@ require "devise/models/stormpath_authenticatable"
 
 describe Devise::Models::StormpathAuthenticatable do
   class User
+    class << self
+      %w{attr_accessible after_initialize before_create before_update after_destroy}.each do |method_name|
+        define_method method_name do |*args|
+        end
+      end
+    end
     include Devise::Models::StormpathAuthenticatable
   end
 
