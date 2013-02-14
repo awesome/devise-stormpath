@@ -1,4 +1,5 @@
 require "active_support/concern"
+require "stormpath/rails/account"
 
 module Devise
   module Models
@@ -10,6 +11,7 @@ module Devise
       end
 
       included do
+        include ::Stormpath::Rails::Account
         attr_accessor :password_confirmation, :password
         attr_reader :current_password
       end
